@@ -1,6 +1,13 @@
-{-|
-file: DPLib.hs
-動的計画法のライブラリ
+{- |
+Module      : DPLib
+gDescription :
+Copyright   : (c) Hiroto Kato, 2020
+License     :
+Maintainer  : ff.king.hiroto@gmail.com
+Stability   : experimental
+Portability : POSIX
+
+Dynamic Programming library
 -}
 module DPLib (
   DP
@@ -9,29 +16,26 @@ module DPLib (
   ) where
 
 import qualified Data.Map
-import State
+import Control.Monad.State
 
--- 型定義
+-- | Type definition
 type Memo a b = Data.Map.Map a b
 type DP a b = a -> State (Memo a b) b
 
--- |
--- 空メモを返す関数
+-- | 空メモを返す関数
 emptyMemo :: Memo a b
 emptyMemo = Data.Map.empty
 
--- |
--- メモのlookup関数
+-- | メモのlookup関数
 lookupMemo :: Ord a => a -> Memo a b -> Maybe b
 lookupMemo = Data.Map.lookup
 
--- |
--- メモに追加する関数
+-- | メモに追加する関数
 insertMemo :: Ord a => a -> b -> Memo a b -> Memo a b
 insertMemo = Data.Map.insert
 
 -- |
--- 動的計画法
+-- Dynamic Programing main function (Memoization)
 -- 関数fを受け取り, 引数xをlookupしてメモにあればそれを返し，なければ，計算して結果をinsertしつつ返す
 dp :: Ord a => DP a b -> DP a b
 dp f x = do
