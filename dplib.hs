@@ -1,6 +1,6 @@
 {- |
 Module      : DPLib
-gDescription :
+Description :
 Copyright   : (c) Hiroto Kato, 2020
 License     :
 Maintainer  : ff.king.hiroto@gmail.com

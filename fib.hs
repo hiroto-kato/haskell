@@ -15,3 +15,14 @@ import DPLib
 main :: IO()
 main = do
   
+fib :: Int -> Integer
+fib = DPLib.evalDP fibSub
+
+fibSub :: DP Int Integer
+fibSub = dp $ \n ->
+  if n <= 1
+  then return (toInteger n)
+  else do
+    a <- fibSub (n - 2)
+    b <- fibSub (n - 1)
+    return (a + b)
