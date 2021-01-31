@@ -16,7 +16,7 @@ main :: IO()
 main = do
   
 fib :: Int -> Integer
-fib = DPLib.evalDP fibSub
+fib 0 = DPLib.evalDP fibSub 
 
 fibSub :: DP Int Integer
 fibSub = dp $ \n ->

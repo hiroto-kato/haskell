@@ -16,12 +16,15 @@ import qualified Data.ByteString.Char8 as BS
 
 -- List to Tuple
 tuplify2 :: [a] -> (a, a)
-tuplify2 (x:y:_) = (x,y)
+tuplify2 (x:y:_) = (x, y)
 tuplify2 _ = undefined
 
 --Input functions with ByteString
+readInt :: BS.ByteString -> Integer
 readInt = fst . fromJust . BS.readInteger
+readIntTuple :: BS.ByteString -> (Integer, Integer)
 readIntTuple = tuplify2 . map readInt . BS.words
+readIntList :: BS.ByteString -> [Integer]
 readIntList = map readInt . BS.words
 
 -- Input Integer (cf. >2)
@@ -52,6 +55,7 @@ getIntNTuples n = map readIntTuple <$> replicateM (fromIntegral n) BS.getLine
 getIntTuples :: IO [(Integer, Integer)]
 getIntTuples = map readIntTuple . BS.lines <$> BS.getContents
 
+main :: IO()
 main = do
   --  [n,m] <- getIntList
   n <- getIntTuples
